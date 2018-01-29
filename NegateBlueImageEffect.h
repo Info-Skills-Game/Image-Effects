@@ -1,6 +1,6 @@
 #pragma once
-#ifndef NEGATE_BLUE_IMAGE_EFFECT 
-#define NEGATE_BLUE_IMAGE_EFFECT 
+#ifndef NEGATE_BLUE_IMAGE_EFFECT
+#define NEGATE_BLUE_IMAGE_EFFECT
 
 #include "ImageEffect.h"
 
@@ -21,5 +21,5 @@ class NegateBlueImageEffect : public ImageEffect
 
 };
 
-#endif // !NEGATE_BLUE_IMAGE_EFFECT 
+#endif // !NEGATE_BLUE_IMAGE_EFFECT
 

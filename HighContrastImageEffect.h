@@ -32,5 +32,5 @@ class HighContrastImageEffect : public ImageEffect
 
 };
 
-#endif // !HGH_CONTRAST_IMAGE_EFFECT 
+#endif // !HIGH_CONTRAST_IMAGE_EFFECT 
 

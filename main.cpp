@@ -16,13 +16,14 @@
 #include "AddNoiseImageEffect.h"
 #include "GrayscaleImageEffect.h"
 #include "HighContrastImageEffect.h"
+#include "SplitImageEffect.h" //Added by Estuardo because I thought it was cool
 #include "HorizontalFlipImageEffect.h"
 #include "VerticalFlipImageEffect.h"
 
 using namespace std;
 
 enum colors_t { RED = 0, GREEN, BLUE };
-enum menu_options_t {REMOVE_RED = 1, REMOVE_GREEN, REMOVE_BLUE, NEGATE_RED, NEGATE_BLUE, NEGATE_GREEN, ADD_NOISE, GRAYSCALE, HIGH_CONTRAST, HORIZONTAL_FLIP, VERTICAL_FLIP}; //PA1 TODO: fill in the rest
+enum menu_options_t {REMOVE_RED = 1, REMOVE_GREEN, REMOVE_BLUE, NEGATE_RED, NEGATE_BLUE, NEGATE_GREEN, ADD_NOISE, GRAYSCALE, HIGH_CONTRAST, VERTICAL_SPLIT, HORIZONTAL_FLIP, VERTICAL_FLIP}; //PA1 TODO: fill in the rest
 PpmDocument ppmDocumentFromFile(string file_name);
 void ppmDocumentToFile(PpmDocument &doc, string file_name);
 menu_options_t getMenuSelection();
@@ -146,7 +147,7 @@ void ppmDocumentToFile(PpmDocument &doc, string file_name)
 menu_options_t getMenuSelection()
 {
     //PA1 TODO: fill in the rest
-    vector<string> menu_options{ "", "Remove red", "Remove green", "Remove blue", "Negate red", "Negate blue", "Negate green", "Add noise", "Grayscale", "High Contrast", "Horizontal Flip", "Vertical Flip"};
+    vector<string> menu_options{ "", "Remove red", "Remove green", "Remove blue", "Negate red", "Negate blue", "Negate green", "Add noise", "Grayscale", "High Contrast", "Vertical Split", "Horizontal Flip", "Vertical Flip"};
     cout << "***Effect Menu***" << endl;
     for (int i = 1; i < menu_options.size(); i++)
     {
@@ -201,6 +202,10 @@ void applyImageEffect(PpmDocument &doc, menu_options_t option)
 
 	 case HIGH_CONTRAST:
 		 effect = new HighContrastImageEffect();
+		 break;
+		 
+	 case VERTICAL_SPLIT:
+		 effect = new VerticalSplitImageEffect();
 		 break;
 
      case HORIZONTAL_FLIP:

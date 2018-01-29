@@ -2,7 +2,7 @@
 #ifndef REMOVE_BLUE_EFFECT_H
 #define REMOVE_BLUE_EFFECT_H
 
-//this image effect will remove all green from a picture
+//this image effect will remove all blue from a picture
 class RemoveBlueImageEffect : public ImageEffect
 {
     virtual void processImage(PpmDocument &doc)

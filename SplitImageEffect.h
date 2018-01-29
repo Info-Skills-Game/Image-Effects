@@ -1,11 +1,11 @@
 #pragma once
-#ifndef HORIZONTAL_FLIP_IMAGE_EFFECT
-#define HORIZONTAL_FLIP_IMAGE_EFFECT
+#ifndef VERTICAL_SPLIT_IMAGE_EFFECT
+#define VERTICAL_SPLIT_IMAGE_EFFECT
 
 #include "ImageEffect.h"
 
-//this image effect will flip the photo horizontally
-class HorizontalFlipImageEffect : public ImageEffect
+//this image effect will make the image weird
+class VerticalSplitImageEffect : public ImageEffect
 {
     virtual void processImage(PpmDocument &doc)
     {
@@ -14,13 +14,14 @@ class HorizontalFlipImageEffect : public ImageEffect
             for (int j = 0; j < doc.getWidth()/2; j++)
             {
 				Pixel& p = doc.getPixel(i, j);
-				Pixel temp = doc.getPixel(i,(doc.getWidth()-j));
+				Pixel& temp = doc.getPixel(i,(doc.getWidth()-j));
                 doc.setPixel(i,(doc.getWidth()-j),p);
                 doc.setPixel(i,j,temp);
             }
         }
     }
+
 };
 
-#endif // !HORIZONTAL_FLIP_IMAGE_EFFECT
+#endif // !VERTICAL_SPLIT_IMAGE_EFFECT
 
