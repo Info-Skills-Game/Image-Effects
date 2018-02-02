@@ -20,8 +20,8 @@
 #include "HorizontalFlipImageEffect.h"
 #include "VerticalFlipImageEffect.h"
 #include "RotateImageEffect.h"
-//#include "BlurImageEffect.h"
-//#include "PixelateImageEffect.h"
+#include "BlurImageEffect.h"
+#include "PixelateImageEffect.h"
 
 using namespace std;
 
@@ -222,7 +222,7 @@ void applyImageEffect(PpmDocument &doc, menu_options_t option)
 	 case ROTATE:
 		 effect = new RotateImageEffect();
 		 break;
-	/*	 
+		 
      case BLUR:
 		 effect = new BlurImageEffect();
 		 break;
@@ -230,7 +230,7 @@ void applyImageEffect(PpmDocument &doc, menu_options_t option)
 	 case PIXELATE:
 		 effect = new PixelateImageEffect();
 		 break;
-	*/
+	
 	}
 
     if (effect != nullptr)
