@@ -6,7 +6,7 @@
 #include "Pixel.h"
 
 
-//this image effect will rotate the photo 90 degrees
+//this image effect will blur the image
 class BlurImageEffect : public ImageEffect
 {
     virtual void processImage(PpmDocument &doc)
@@ -15,90 +15,85 @@ class BlurImageEffect : public ImageEffect
         {
             for (int j = 0; j < doc.getWidth(); j++)
             {
-				int red_avg = 0;
-				int green_avg = 0;
-				int blue_avg = 0;
-				int operations = 0;
-				
-				Pixel& p = doc.getPixel(i, j);
-				Pixel left_pixel = doc.getPixel(i,j+1);
-				Pixel right_pixel = doc.getPixel(i,j-1);
-				
-				if(j < doc.getWidth()){
-					red_avg = red_avg + right_pixel.getRed();
-					green_avg = green_avg + right_pixel.getGreen();
-					blue_avg = blue_avg + right_pixel.getBlue();
-					operations++;
+            	int _operations = 0;
+            	int _red_avg = 0;
+            	int _green_avg = 0;
+            	int _blue_avg = 0;
+				Pixel& p = doc.getPixel(i,j);
+
+				if(j < doc.getWidth()-1){
+					Pixel right_p = doc.getPixel(i, j+1);
+					_red_avg = _red_avg + right_p.getRed();
+					_green_avg = _green_avg + right_p.getGreen();
+					_blue_avg = _blue_avg + right_p.getBlue();
+					_operations++;
 				}
-				
+
 				if(j != 0){
-					red_avg = red_avg + left_pixel.getRed();
-					green_avg = green_avg + left_pixel.getGreen();
-					blue_avg = blue_avg + left_pixel.getBlue();
-					operations++;
+					Pixel left_p = doc.getPixel(i, j-1);
+					_red_avg = _red_avg + left_p.getRed();
+					_green_avg = _green_avg + left_p.getGreen();
+					_blue_avg = _blue_avg + left_p.getBlue();
+					_operations++;
 				}
-				
-				red_avg = red_avg + p.getRed();
-				green_avg = green_avg + p.getGreen();
-				blue_avg = blue_avg + p.getBlue();
-				
-				operations++;
-				
-				red_avg = red_avg/operations;
-				green_avg = green_avg/operations;
-				blue_avg = blue_avg/operations;
-				
-				p.setRed(red_avg);
-				p.setGreen(green_avg);
-				p.setBlue(blue_avg);
+
+				_red_avg = _red_avg + p.getRed();
+				_green_avg = _green_avg + p.getGreen();
+				_blue_avg = _blue_avg + p.getBlue();
+				_operations++;
+
+				_red_avg = _red_avg/_operations;
+				_green_avg = _green_avg/_operations;
+				_blue_avg = _blue_avg/_operations;
+
+				p.setRed(_red_avg);
+				p.setGreen(_green_avg);
+				p.setBlue(_blue_avg);
+
 			}
         }
-		
-		/*
-		for (int i = 0; i < doc.getHeight(); i++)
+
+        for (int i = 0; i < doc.getHeight(); i++)
         {
             for (int j = 0; j < doc.getWidth(); j++)
             {
-				int red_avg = 0;
-				int green_avg = 0;
-				int blue_avg = 0;
-				int operations = 0;
-				
-				Pixel& p = doc.getPixel(i, j);
+            	int _operations = 0;
+            	int _red_avg = 0;
+            	int _green_avg = 0;
+            	int _blue_avg = 0;
+				Pixel& p = doc.getPixel(i,j);
 
-				Pixel above_pixel = doc.getPixel(i+1,j);
-				Pixel below_pixel = doc.getPixel(i-1,j);
-				
-				if(i > 0){
-					red_avg = red_avg + below_pixel.getRed();
-					green_avg = green_avg + below_pixel.getGreen();
-					blue_avg = blue_avg + below_pixel.getBlue();
-					operations++;
-				}
-				
 				if(i < doc.getHeight()-1){
-					red_avg = red_avg + above_pixel.getRed();
-					green_avg = green_avg + above_pixel.getGreen();
-					blue_avg = blue_avg + above_pixel.getBlue();
-					operations++;
+					Pixel above_p = doc.getPixel(i+1, j);
+					_red_avg = _red_avg + above_p.getRed();
+					_green_avg = _green_avg + above_p.getGreen();
+					_blue_avg = _blue_avg + above_p.getBlue();
+					_operations++;
 				}
+
+				if(i != 0){
+					Pixel below_p = doc.getPixel(i-1, j);
+					_red_avg = _red_avg + below_p.getRed();
+					_green_avg = _green_avg + below_p.getGreen();
+					_blue_avg = _blue_avg + below_p.getBlue();
+					_operations++;
+				}
+
+				_red_avg = _red_avg + p.getRed();
+				_green_avg = _green_avg + p.getGreen();
+				_blue_avg = _blue_avg + p.getBlue();
+				_operations++;
+
+				_red_avg = _red_avg/_operations;
+				_green_avg = _green_avg/_operations;
+				_blue_avg = _blue_avg/_operations;
 				
-				red_avg = red_avg + p.getRed();
-				green_avg = green_avg + p.getGreen();
-				blue_avg = blue_avg + p.getBlue();
-				
-				operations++;
-				
-				red_avg = red_avg/operations;
-				green_avg = green_avg/operations;
-				blue_avg = blue_avg/operations;
-				
-				p.setRed(red_avg);
-				p.setGreen(green_avg);
-				p.setBlue(blue_avg);
+				p.setRed(_red_avg);
+				p.setGreen(_green_avg);
+				p.setBlue(_blue_avg);
+
 			}
         }
-		*/
     }
 };
 
